@@ -26,22 +26,9 @@ Settings.config(
   }
 );
 
-if (!Settings.option('games')) {
-  Settings.option('games', {'GTA V': 271590},{'ARK': 346110});
+if (Settings.option('games') === undefined) {
+  Settings.option('games', [{'name': 'Grand Theft Auto V', 'title': 'GTA V', 'appid': 271590, 'price': 0}]);
 }
-
-var games = [
-	{
-		'title': 'GTA V',
-		'appid': 271590,
-		'price': 0
-	},
-	{
-		'title': 'ARK',
-		'appid': 346110,
-		'price': 0
-	}
-];
 
 var menu_items = [];
 
@@ -52,10 +39,10 @@ var formatPrice = function(price) {
 	return String(price).slice(0,String(price).length - 2) + '.' + String(price).slice(-2) + '$';
 };
 
-for (var game in games) {
+for (var game in Settings.option('games')) {
   menu_items.push({
-    title: games[game].title,
-    subtitle: formatPrice(games[game].price)
+    title: Settings.option('games')[game].title,
+    subtitle: formatPrice(Settings.option('games')[game].price)
   });
 }
 
@@ -66,23 +53,23 @@ var menu = new UI.Menu({
 });
 
 menu.redrawItem = function(index) {
-  menu.item(0, index, {title: games[index].title, subtitle: formatPrice(games[index].price)});
+  menu.item(0, index, {title: Settings.option('games')[index].title, subtitle: formatPrice(Settings.option('games')[index].price)});
 };
 
 var priceUpdator = function(gameIndex) {
-		console.log(games[gameIndex].title + " " + games[gameIndex].appid);
-    ajax({ url: "http://store.steampowered.com/api/appdetails?" + "appids=" + games[gameIndex].appid + "&cc=us", type: 'json' },
+		console.log(Settings.option('games')[gameIndex].title + " " + Settings.option('games')[gameIndex].appid);
+    ajax({ url: "http://store.steampowered.com/api/appdetails?" + "appids=" + Settings.option('games')[gameIndex].appid + "&cc=us", type: 'json' },
       function(data) {
-        var price = data[games[gameIndex].appid].data.price_overview.final;
+        var price = data[Settings.option('games')[gameIndex].appid].data.price_overview.final;
         console.log('Price: ' + price);
-        games[gameIndex].price = price;
+        Settings.option('games')[gameIndex].price = price;
         menu.redrawItem(gameIndex);
       }
     );
 };
 
 menu.updatePrices = function() {
-	for (var gameIndex in games) {
+	for (var gameIndex in Settings.option('games')) {
 		priceUpdator(gameIndex);
 	}
 };
