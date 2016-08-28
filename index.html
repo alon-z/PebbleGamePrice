@@ -42,6 +42,7 @@
       </div>
     </div>
     <p id="tmp"></p>
+    <p id="tmp2"></p>
     
   <script>
     function saveOptions() {
@@ -78,6 +79,7 @@
           //2 colons not found
       }
       $("#tmp").text(parsed);
+      $("#tmp2").text(window.location.href);
       var obj = jQuery.parseJSON(decodeURIComponent(parsed));
       for(key in obj) {
         $("#t_games tr:last").after('<tr id="game"><td id="game_name">' + key + '</td><td id="game_appid">' + obj[key] + '</td></tr>').trigger("create");
