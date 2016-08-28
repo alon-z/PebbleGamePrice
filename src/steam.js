@@ -17,16 +17,23 @@ function connectSteam() {
   req.onload = function(e) {
     if (req.readyState == 4) {
       if(req.status == 200) {
-        console.log(req.responseText);
-
         var response = JSON.parse(req.responseText);
-
         var price = response[appid].data.price_overview.final;
+        console.log("Price: " + price);
+        // Assemble dictionary using our keys
+        var dictionary = {
+					'PRICE': price,
+				};
 
-        console.log(price);
-        Pebble.sendAppMessage({
-          "PRICE": price
-        });
+				// Send to Pebble
+				Pebble.sendAppMessage(dictionary,
+					function(e) {
+						console.log('Weather info sent to Pebble successfully!');
+					},
+					function(e) {
+						console.log('Error sending weather info to Pebble! ' + e);
+					}
+				);
 
       } else {
         console.log("Error");
