@@ -69,6 +69,7 @@
       for(key in obj) {
         $("#t_games tr:last").after('<tr id="game"><td id="game_name">' + key + '</td><td id="game_appid">' + obj[key] + '</td></tr>');
       }
+      $("t_games").trigger("create")
     });
   </script>
   </body>
