@@ -1,5 +1,6 @@
 #include <pebble.h>
 #include "main_menu.h"
+#include "game_window.h"
 
 // Settings
 #define GAMES_SIZE 3
@@ -44,4 +45,5 @@ void createMainMenuItems(void) {
 void main_menu_select_callback(int index, void *ctx) {
   main_menu_items[index].subtitle = "You've hit select here!";
   layer_mark_dirty(simple_menu_layer_get_layer(main_menu));
+  load_game_window(main_menu_items[index].title);
 }

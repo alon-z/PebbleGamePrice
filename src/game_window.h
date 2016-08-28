@@ -1,0 +1,1 @@
+void load_game_window(const char game_name[]);
