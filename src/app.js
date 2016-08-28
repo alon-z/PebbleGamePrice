@@ -13,6 +13,7 @@ Settings.config(
   { url: 'https://alonikomax.github.io/PebbleGamePrice/' + encodeURIComponent(JSON.stringify(Settings.option('games')))},
   function(e) {
     console.log('opening configurable');
+    console.log('https://alonikomax.github.io/PebbleGamePrice/' + encodeURIComponent(JSON.stringify(Settings.option('games'))));
 
     // Reset color to red before opening the webview
     Settings.option('color', 'red');
@@ -21,6 +22,9 @@ Settings.config(
     console.log('closed configurable');
     console.log(Settings.option());
     console.log(Settings.option('games'));
+  },
+  function(e) {
+    console.log('error with configuration');
   }
 );
 
