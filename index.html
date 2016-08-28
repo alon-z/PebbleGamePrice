@@ -73,7 +73,7 @@
       var parsed = window.location.hash.substring(1);
       $("#tmp").text(parsed);
       $("#tmp2").text(window.location.href);
-      var obj = jQuery.parseJSON(decodeURIComponent(parsed));
+      var obj = jQuery.parseJSON(decodeURIComponent(parsed))["games"];
       for(key in obj) {
         $("#t_games tr:last").after('<tr id="game"><td id="game_name">' + key + '</td><td id="game_appid">' + obj[key] + '</td></tr>').trigger("create");
       }
