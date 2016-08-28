@@ -6,6 +6,12 @@
     "companyName": "aloniko.zus@gmail.com",
     "longName": "PebbleGamePrice",
     "projectType": "pebblejs",
+    "messageKeys": [
+        "test", 0
+    ],
+    "dependencies": {
+        "pebble-clay": "^1.0.2"
+    },
     "resources": {
         "media": [
             {
