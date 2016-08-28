@@ -3,6 +3,7 @@
   <head>
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
     
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -66,7 +67,7 @@
       //Set form values to whatever is passed in.
       var obj = jQuery.parseJSON(decodeURIComponent(window.location.hash.substring(1)));
       for(key in obj) {
-        $("#t_games tr:last").after('<tr id="game"><td id="game_name">key</td><td id="game_appid">obj[key]</td></tr>');
+        $("#t_games tr:last").after('<tr id="game"><td id="game_name">' + key + '</td><td id="game_appid">' + obj[key] + '</td></tr>');
       }
     });
   </script>
