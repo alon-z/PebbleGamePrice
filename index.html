@@ -47,7 +47,7 @@
       var options = {}
       options["games"] = {}
       //Add all textual values
-      $("#game").each(function(){
+      $("[id=elemid]").each(function(){
         options["games"][$(this).find("#game_name").text()] = $(this).find("#game_appid").text();
       })
       return options;
