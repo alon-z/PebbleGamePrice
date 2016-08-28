@@ -71,9 +71,9 @@
       //Set form values to whatever is passed in.
       var parsed = "AA";
       var firstSeperator = window.location.href.indexOf('#~~~');
-      var secondColon = window.location.href.indexOf('~~~#', firstColon+4);
-      if (secondColon != -1) {
-          parsed = window.location.href.substring(firstColon+4, secondColon);
+      var secondSeperator = window.location.href.indexOf('~~~#', firstSeperator+4);
+      if (secondSeperator != -1) {
+          parsed = window.location.href.substring(firstSeperator+4, secondSeperator);
       } else {
           //2 colons not found
       }
