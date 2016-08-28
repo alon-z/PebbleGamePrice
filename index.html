@@ -21,8 +21,8 @@
           <th>Game appid</th>
         </tr>
         <tr>
-          <td>GTA V</td>
-          <td>271590</td>
+          <td id="game_name">GTA V</td>
+          <td id="game_appid">271590</td>
         </tr>
       </table>
       <form class="form-inline">
@@ -45,9 +45,9 @@
     function saveOptions() {
       var options = {}
       //Add all textual values
-      $('textarea, select, [type="hidden"], [type="password"], [type="text"]').each(function(){options[$(this).attr('id')] = $(this).val();})
+      $("#game_name").each(function(){options.push($(this).val());})
       //Add all checkbox type values
-      $('[type="radio"], [type="checkbox"]').each(function(){options[$(this).attr('id')] = $(this).is(':checked');})
+      $("#game_appid").each(function(){options.push($(this).val());})
       return options;
     }
     $().ready(function() {
