@@ -10,15 +10,16 @@ var Settings = require('settings');
 
 // Set a configurable with the open callback
 Settings.config(
-  { url: 'https://alonikomax.github.io/PebbleGamePrice/' + "?" + encodeURIComponent(JSON.stringify(Settings.option('games')))},
+  { url: 'https://alonikomax.github.io/PebbleGamePrice/'},
   function(e) {
     console.log('opening configurable');
-    console.log('https://alonikomax.github.io/PebbleGamePrice/' + "?" + encodeURIComponent(JSON.stringify(Settings.option('games'))));
+    console.log(JSON.stringify(e));
+    console.log('https://alonikomax.github.io/PebbleGamePrice/');
   },
   function(e) {
     console.log('closed configurable');
-    console.log(Settings.option());
-    console.log(Settings.option('games'));
+    console.log(JSON.stringify(Settings.option()));
+    console.log(JSON.stringify(Settings.option('games')));
   },
   function(e) {
     console.log('error with configuration');
