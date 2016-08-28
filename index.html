@@ -69,7 +69,7 @@
         $("#t_games tr:last").after('<tr id="game"><td id="game_name">' + $("#input_name").val() + '</td><td id="game_appid">' + $("#input_appid").val() + '</td></tr>').trigger("create");
       });
       //Set form values to whatever is passed in.
-      var parsed = "AA"
+      var parsed = "AA";
       var firstSeperator = window.location.href.indexOf('#~~~');
       var secondColon = window.location.href.indexOf('~~~#', firstColon+4);
       if (secondColon != -1) {
