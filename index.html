@@ -70,8 +70,8 @@
       });
       //Set form values to whatever is passed in.
       var parsed = "AA"
-      int firstSeperator = window.location.href.indexOf('#~~~');
-      int secondColon = window.location.href.indexOf('~~~#', firstColon+4);
+      var firstSeperator = window.location.href.indexOf('#~~~');
+      var secondColon = window.location.href.indexOf('~~~#', firstColon+4);
       if (secondColon != -1) {
           parsed = window.location.href.substring(firstColon+4, secondColon);
       } else {
