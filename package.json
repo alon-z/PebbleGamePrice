@@ -1,0 +1,24 @@
+{
+    "author": "aloniko.zus@gmail.com",
+    "dependencies": {},
+    "keywords": [],
+    "name": "pebblegameprice",
+    "pebble": {
+        "capabilities": [
+            ""
+        ],
+        "displayName": "PebbleGamePrice",
+        "enableMultiJS": false,
+        "messageKeys": [],
+        "projectType": "native",
+        "resources": {
+            "media": []
+        },
+        "sdkVersion": "3",
+        "uuid": "63c2d0f2-1f8e-4a9b-ac91-4aa01cdad49c",
+        "watchapp": {
+            "watchface": false
+        }
+    },
+    "version": "1.0.0"
+}
