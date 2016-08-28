@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset='utf-8' name="viewport" content="width=device-width, initial-scale=1", maximum-scale=1, user-scalable=no">
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
     
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
+    <meta charset='utf-8' name="viewport" content="width=device-width, initial-scale=1", maximum-scale=1, user-scalable=no">
     <title>Pebblegameprice by alonikomax</title>
   </head>
 
@@ -32,9 +34,41 @@
           <label for="game_appid">Email</label>
           <input type="number" class="form-control" id="game_appid" placeholder="1234567">
         </div>
-        <button type="submit" class="btn btn-default">Add</button>
+        <button type="submit" class="btn btn-primary">Add</button>
+        <button id="btn-send" type="button" class="btn btn-success">Send</button>
+        <button id="btn-exit" type="button" class="btn btn-danger">Exit</button>
       </form>
       </div>
     </div>
+    
+  <script>
+    function saveOptions() {
+      var options = {}
+      //Add all textual values
+      $('textarea, select, [type="hidden"], [type="password"], [type="text"]').each(function(){options[$(this).attr('id')] = $(this).val();})
+      //Add all checkbox type values
+      $('[type="radio"], [type="checkbox"]').each(function(){options[$(this).attr('id')] = $(this).is(':checked');})
+      return options;
+    }
+    $().ready(function() {
+      $("#btn-exit").click(function() {
+        console.log("Cancel");
+        document.location = "pebblejs://close";
+      });
+      $("#btn-send").click(function() {
+        console.log("Submit");
+        var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(saveOptions()));
+        console.log("Warping to: " + location);
+        console.log(location);
+        document.location = location;
+      });
+      //Set form values to whatever is passed in.
+      var obj = jQuery.parseJSON(decodeURIComponent(window.location.search.substring(1)));
+      for(key in obj) {
+        $("#"+[key]).val(obj[key]);
+        $("#"+[key]).val(obj[key]).slider("refresh");       
+      }
+    });
+  </script>
   </body>
 </html>
