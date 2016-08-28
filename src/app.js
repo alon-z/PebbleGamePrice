@@ -5,84 +5,68 @@
  */
 
 var UI = require('ui');
-var Vector2 = require('vector2');
+var ajax = require('ajax');
 
-var main = new UI.Card({
-  title: 'Pebble.js',
-  icon: 'images/menu_icon.png',
-  subtitle: 'Hello World!',
-  body: 'Press any button.',
-  subtitleColor: 'indigo', // Named colors
-  bodyColor: '#9a0036' // Hex colors
-});
+var games = [
+	{
+		'title': 'GTA V',
+		'appid': 271590,
+		'price': 0
+	},
+	{
+		'title': 'ARK',
+		'appid': 346110,
+		'price': 0
+	}
+];
 
-main.show();
+var menu_items = [];
 
-main.on('click', 'up', function(e) {
-  var menu = new UI.Menu({
+var formatPrice = function(price) {
+	if (String(price).length < 3) {
+		return 0 + '.' + String(price).slice(-String(price).length) + '$'; 
+	}
+	return String(price).slice(0,String(price).length - 2) + '.' + String(price).slice(-2) + '$';
+};
+
+for (var game in games) {
+  menu_items.push({
+    title: games[game].title,
+    subtitle: formatPrice(games[game].price)
+  });
+}
+
+var menu = new UI.Menu({
     sections: [{
-      items: [{
-        title: 'Pebble.js',
-        icon: 'images/menu_icon.png',
-        subtitle: 'Can do Menus'
-      }, {
-        title: 'Second Item',
-        subtitle: 'Subtitle Text'
-      }, {
-        title: 'Third Item',
-      }, {
-        title: 'Fourth Item',
-      }]
+      items: menu_items
     }]
-  });
-  menu.on('select', function(e) {
-    console.log('Selected item #' + e.itemIndex + ' of section #' + e.sectionIndex);
-    console.log('The item is titled "' + e.item.title + '"');
-  });
-  menu.show();
 });
 
-main.on('click', 'select', function(e) {
-  var wind = new UI.Window({
-    backgroundColor: 'black'
-  });
-  var radial = new UI.Radial({
-    size: new Vector2(140, 140),
-    angle: 0,
-    angle2: 300,
-    radius: 20,
-    backgroundColor: 'cyan',
-    borderColor: 'celeste',
-    borderWidth: 1,
-  });
-  var textfield = new UI.Text({
-    size: new Vector2(140, 60),
-    font: 'gothic-24-bold',
-    text: 'Dynamic\nWindow',
-    textAlign: 'center'
-  });
-  var windSize = wind.size();
-  // Center the radial in the window
-  var radialPos = radial.position()
-      .addSelf(windSize)
-      .subSelf(radial.size())
-      .multiplyScalar(0.5);
-  radial.position(radialPos);
-  // Center the textfield in the window
-  var textfieldPos = textfield.position()
-      .addSelf(windSize)
-      .subSelf(textfield.size())
-      .multiplyScalar(0.5);
-  textfield.position(textfieldPos);
-  wind.add(radial);
-  wind.add(textfield);
-  wind.show();
+menu.redrawItem = function(index) {
+  menu.item(0, index, {title: games[index].title, subtitle: formatPrice(games[index].price)});
+};
+
+var priceUpdator = function(gameIndex) {
+		console.log(games[gameIndex].title + " " + games[gameIndex].appid);
+    ajax({ url: "http://store.steampowered.com/api/appdetails?" + "appids=" + games[gameIndex].appid + "&cc=us", type: 'json' },
+      function(data) {
+        var price = data[games[gameIndex].appid].data.price_overview.final;
+        console.log('Price: ' + price);
+        games[gameIndex].price = price;
+        menu.redrawItem(gameIndex);
+      }
+    );
+};
+
+menu.updatePrices = function() {
+	for (var gameIndex in games) {
+		priceUpdator(gameIndex);
+	}
+};
+
+menu.on('select', function(e) {
+  priceUpdator(e.itemIndex);
 });
 
-main.on('click', 'down', function(e) {
-  var card = new UI.Card();
-  card.title('A Card');
-  card.subtitle('Is a Window');
-  card.body('The simplest window type in Pebble.js.');
-  card.show();
-});
+menu.updatePrices();
+menu.show();
