@@ -18,12 +18,9 @@
       <h1>PebbleGamePrice <small>Settings</small></h1>
       <table id="t_games" class="table table-striped" data-role="table">
         <tr>
-          <th>Game Name</th>
+          <th>Game full name</th>
+          <th>Game short title</th>
           <th>Game appid</th>
-        </tr>
-        <tr id="game">
-          <td id="game_name">GTA V</td>
-          <td id="game_appid">271590</td>
         </tr>
       </table>
       <form class="form-inline">
@@ -75,7 +72,7 @@
       $("#tmp2").text(window.location.href);
       var obj = jQuery.parseJSON(decodeURIComponent(parsed))["games"];
       for(key in obj) {
-        $("#t_games tr:last").after('<tr id="game"><td id="game_name">' + key + '</td><td id="game_appid">' + obj[key] + '</td></tr>').trigger("create");
+        $("#t_games tr:last").after('<tr id="game"><td id="game_name">' + obj[key].name + '</td><td id="game_title">' + obj[key].title + '</td><td id="game_appid">' + obj[key].appid + '</td></tr>').trigger("create");
       }
     });
   </script>
