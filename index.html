@@ -43,11 +43,12 @@
     
   <script>
     function saveOptions() {
-      var options = []
+      var options = {}
+      options["games"] = []
       //Add all textual values
-      $("#game_name").each(function(){options.push($(this).val());})
+      $("#game_name").each(function(){options["games"].push($(this).val());})
       //Add all checkbox type values
-      $("#game_appid").each(function(){options.push($(this).val());})
+      $("#game_appid").each(function(){options["games"].push($(this).val());})
       return options;
     }
     $().ready(function() {
