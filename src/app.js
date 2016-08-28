@@ -10,7 +10,7 @@ var Settings = require('settings');
 
 // Set a configurable with the open callback
 Settings.config(
-  { url: 'https://alonikomax.github.io/PebbleGamePrice/' },
+  { url: 'https://alonikomax.github.io/PebbleGamePrice/' + encodeURIComponent(JSON.stringify(Settings.option('games')))},
   function(e) {
     console.log('opening configurable');
 
