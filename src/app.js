@@ -8,18 +8,28 @@ var UI = require('ui');
 var ajax = require('ajax');
 var Settings = require('settings');
 
+var menu_items = [];
+
+var menu = new UI.Menu({
+    sections: [{
+      items: menu_items
+    }]
+});
+
 // Set a configurable with the open callback
 Settings.config(
   { url: 'https://alonikomax.github.io/PebbleGamePrice/'},
   function(e) {
     console.log('opening configurable');
     console.log(JSON.stringify(e));
+    console.log(encodeURIComponent(JSON.stringify(Settings.option('games'))));
     console.log('https://alonikomax.github.io/PebbleGamePrice/');
   },
   function(e) {
     console.log('closed configurable');
     console.log(JSON.stringify(Settings.option()));
     console.log(JSON.stringify(Settings.option('games')));
+    menu.updatePrices();
   },
   function(e) {
     console.log('error with configuration');
@@ -29,8 +39,6 @@ Settings.config(
 if (Settings.option('games') === undefined) {
   Settings.option('games', [{'name': 'Grand Theft Auto V', 'title': 'GTA V', 'appid': 271590, 'price': 0}]);
 }
-
-var menu_items = [];
 
 var formatPrice = function(price) {
 	if (String(price).length < 3) {
@@ -45,12 +53,6 @@ for (var game in Settings.option('games')) {
     subtitle: formatPrice(Settings.option('games')[game].price)
   });
 }
-
-var menu = new UI.Menu({
-    sections: [{
-      items: menu_items
-    }]
-});
 
 menu.redrawItem = function(index) {
   menu.item(0, index, {title: Settings.option('games')[index].title, subtitle: formatPrice(Settings.option('games')[index].price)});
