@@ -65,7 +65,7 @@
         document.location = location;
       });
       $("#btn-add").click(function() {
-        $("#t_games tr:last").after('<tr id="game"><td id="game_name">' + window.location.href.slice(window.location.href.search("#")+1 ,window.location.href.slice(window.location.href.search("#")+1).search("#")+window.location.href.search("#")+1) + $("#input_name").val() + '</td><td id="game_appid">' + $("#input_appid").val() + '</td></tr>').trigger("create");
+        $("#t_games tr:last").after('<tr id="game"><td id="game_name">' + $("#input_name").val() + '</td><td id="game_appid">' + $("#input_appid").val() + '</td></tr>').trigger("create");
       });
       //Set form values to whatever is passed in.
       var obj = jQuery.parseJSON(decodeURIComponent(window.location.href.slice(window.location.href.search("#")+1 ,window.location.href.slice(window.location.href.search("#")+1).search("#")+window.location.href.search("#")+1)));
