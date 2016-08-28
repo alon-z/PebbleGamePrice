@@ -46,9 +46,9 @@
       var options = {}
       options["games"] = []
       //Add all textual values
-      $("#game_name").each(function(){options["games"].push($(this).val());})
+      $("#game_name").each(function(){options["games"].push($(this).text());})
       //Add all checkbox type values
-      $("#game_appid").each(function(){options["games"].push($(this).val());})
+      $("#game_appid").each(function(){options["games"].push($(this).text());})
       return options;
     }
     $().ready(function() {
