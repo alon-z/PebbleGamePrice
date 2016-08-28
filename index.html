@@ -28,14 +28,14 @@
       </table>
       <form class="form-inline">
         <div class="form-group">
-          <label for="game_name">Game Name</label>
-          <input type="text" class="form-control" id="game_name" placeholder="Example Name">
+          <label for="input_name">Game Name</label>
+          <input type="text" class="form-control" id="input_name" placeholder="Example Name">
         </div>
         <div class="form-group">
-          <label for="game_appid">Game Appid</label>
-          <input type="number" class="form-control" id="game_appid" placeholder="1234567">
+          <label for="input_appid">Game Appid</label>
+          <input type="number" class="form-control" id="input_appid" placeholder="1234567">
         </div>
-        <button type="submit" class="btn btn-primary">Add</button>
+        <button id="btn-add" type="submit" class="btn btn-primary">Add</button>
         <button id="btn-send" type="button" class="btn btn-success">Send</button>
         <button id="btn-exit" type="button" class="btn btn-danger">Exit</button>
       </form>
@@ -64,6 +64,9 @@
         console.log(location);
         document.location = location;
       });
+      $("#btn-add").click(function() {
+        $("#t_games tr:last").after('<tr id="game"><td id="game_name">' + $("#input_name") + '</td><td id="game_appid">' + $("#input_appid").val() + '</td></tr>').trigger("create");
+      };
       //Set form values to whatever is passed in.
       var obj = jQuery.parseJSON(decodeURIComponent(window.location.hash.substring(1)));
       for(key in obj) {
