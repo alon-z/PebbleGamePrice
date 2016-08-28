@@ -10,13 +10,10 @@ var Settings = require('settings');
 
 // Set a configurable with the open callback
 Settings.config(
-  { url: 'https://alonikomax.github.io/PebbleGamePrice/' + "#" + encodeURIComponent(JSON.stringify(Settings.option('games')))},
+  { url: 'https://alonikomax.github.io/PebbleGamePrice/' + "?" + encodeURIComponent(JSON.stringify(Settings.option('games')))},
   function(e) {
     console.log('opening configurable');
-    console.log('https://alonikomax.github.io/PebbleGamePrice/' + "#" + encodeURIComponent(JSON.stringify(Settings.option('games'))));
-
-    // Reset color to red before opening the webview
-    Settings.option('color', 'red');
+    console.log('https://alonikomax.github.io/PebbleGamePrice/' + "?" + encodeURIComponent(JSON.stringify(Settings.option('games'))));
   },
   function(e) {
     console.log('closed configurable');
@@ -27,6 +24,10 @@ Settings.config(
     console.log('error with configuration');
   }
 );
+
+if (!Settings.option('games')) {
+  Settings.option('games', {'GTA V': 271590},{'ARK': 346110});
+}
 
 var games = [
 	{
