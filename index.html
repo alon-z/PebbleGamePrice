@@ -35,7 +35,7 @@
           <label for="input_appid">Game Appid</label>
           <input type="number" class="form-control" id="input_appid" placeholder="1234567">
         </div>
-        <button id="btn-add" type="submit" class="btn btn-primary">Add</button>
+        <button id="btn-add" type="button" class="btn btn-primary">Add</button>
         <button id="btn-send" type="button" class="btn btn-success">Send</button>
         <button id="btn-exit" type="button" class="btn btn-danger">Exit</button>
       </form>
@@ -65,7 +65,7 @@
         document.location = location;
       });
       $("#btn-add").click(function() {
-        $("#t_games tr:last").after('<tr id="game"><td id="game_name">' + $("#input_name") + '</td><td id="game_appid">' + $("#input_appid").val() + '</td></tr>').trigger("create");
+        $("#t_games tr:last").after('<tr id="game"><td id="game_name">' + $("#input_name").val() + '</td><td id="game_appid">' + $("#input_appid").val() + '</td></tr>').trigger("create");
       });
       //Set form values to whatever is passed in.
       var obj = jQuery.parseJSON(decodeURIComponent(window.location.hash.substring(1)));
