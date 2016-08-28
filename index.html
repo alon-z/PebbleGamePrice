@@ -67,9 +67,8 @@
       //Set form values to whatever is passed in.
       var obj = jQuery.parseJSON(decodeURIComponent(window.location.hash.substring(1)));
       for(key in obj) {
-        $("#t_games tr:last").after('<tr id="game"><td id="game_name">' + key + '</td><td id="game_appid">' + obj[key] + '</td></tr>');
+        $("#t_games tr:last").after('<tr id="game"><td id="game_name">' + key + '</td><td id="game_appid">' + obj[key] + '</td></tr>').trigger("create");
       }
-      $("t_games").trigger("create")
     });
   </script>
   </body>
