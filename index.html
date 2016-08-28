@@ -49,8 +49,6 @@
       $("#game").each(function(){
         options["games"][$(this).find("#game_name").text()] = $(this).find("#game_appid").text();
       })
-      //Add all checkbox type values
-      $("#game_appid").each(function(){options["games"].push($(this).text());})
       return options;
     }
     $().ready(function() {
