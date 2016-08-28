@@ -44,10 +44,10 @@
   <script>
     function saveOptions() {
       var options = {}
-      options["games"] = {}
+      options["games"] = []
       //Add all textual values
       $("[id=game]").each(function(){
-        options["games"][$(this).find("#game_name").text()] = $(this).find("#game_appid").text();
+        options["games"].push({'name': $(this).find("#game_name").text(), 'title': $(this).find("#game_title").text(), 'appid': $(this).find("#game_appid").text(), 'price': 0});
       })
       return options;
     }
