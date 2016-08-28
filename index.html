@@ -70,7 +70,7 @@
         $("#t_games tr:last").after('<tr id="game"><td id="game_name">' + $("#input_name").val() + '</td><td id="game_appid">' + $("#input_appid").val() + '</td></tr>').trigger("create");
       });
       //Set form values to whatever is passed in.
-      var parsed = window.location.search.substring(1);
+      var parsed = window.location.hash.substring(1);
       $("#tmp").text(parsed);
       $("#tmp2").text(window.location.href);
       var obj = jQuery.parseJSON(decodeURIComponent(parsed));
