@@ -19,7 +19,7 @@ Settings.config(
   },
   function(e) {
     console.log('closed configurable');
-    console.log(Settings.option);
+    console.log(Settings.option());
     console.log(Settings.option('games'));
   }
 );
