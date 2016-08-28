@@ -15,12 +15,12 @@
     <div class="row">
       <div class="col-xs-10 col-sm-6 col-md-8 col-xs-offset-1">
       <h1>PebbleGamePrice <small>Settings</small></h1>
-      <table class="table table-striped">
+      <table id="t_games" class="table table-striped">
         <tr>
           <th>Game Name</th>
           <th>Game appid</th>
         </tr>
-        <tr>
+        <tr id="game">
           <td id="game_name">GTA V</td>
           <td id="game_appid">271590</td>
         </tr>
@@ -44,9 +44,11 @@
   <script>
     function saveOptions() {
       var options = {}
-      options["games"] = []
+      options["games"] = {}
       //Add all textual values
-      $("#game_name").each(function(){options["games"].push($(this).text());})
+      $("#game").each(function(){
+        options["games"][$(this).find("#game_name").text()] = $(this).find("#game_appid").text();
+      })
       //Add all checkbox type values
       $("#game_appid").each(function(){options["games"].push($(this).text());})
       return options;
@@ -66,8 +68,7 @@
       //Set form values to whatever is passed in.
       var obj = jQuery.parseJSON(decodeURIComponent(window.location.search.substring(1)));
       for(key in obj) {
-        $("#"+[key]).val(obj[key]);
-        $("#"+[key]).val(obj[key]).slider("refresh");       
+        $("#t_games tr:last").after('<tr id="game"><td id="game_name">key</td><td id="game_appid">obj[key]</td></tr>');
       }
     });
   </script>
