@@ -6,6 +6,23 @@
 
 var UI = require('ui');
 var ajax = require('ajax');
+var Settings = require('settings');
+
+// Set a configurable with the open callback
+Settings.config(
+  { url: 'https://alonikomax.github.io/PebbleGamePrice/' },
+  function(e) {
+    console.log('opening configurable');
+
+    // Reset color to red before opening the webview
+    Settings.option('color', 'red');
+  },
+  function(e) {
+    console.log('closed configurable');
+    console.log(Settings.option);
+    console.log(Settings.option('games'));
+  }
+);
 
 var games = [
 	{
