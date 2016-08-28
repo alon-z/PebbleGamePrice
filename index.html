@@ -42,8 +42,6 @@
         </form>
       </div>
     </div>
-    <p id="tmp"></p>
-    <p id="tmp2"></p>
     
   <script>
     function saveOptions() {
@@ -72,8 +70,6 @@
       });
       //Set form values to whatever is passed in.
       var parsed = window.location.hash.substring(1);
-      $("#tmp").text(parsed);
-      $("#tmp2").text(window.location.href);
       var obj = jQuery.parseJSON(decodeURIComponent(parsed))["games"];
       for(key in obj) {
         $("#t_games tr:last").after('<tr id="game"><td id="game_name">' + obj[key].name + '</td><td id="game_title">' + obj[key].title + '</td><td id="game_appid">' + obj[key].appid + '</td></tr>').trigger("create");
