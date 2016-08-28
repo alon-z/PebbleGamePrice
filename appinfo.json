@@ -1,7 +1,7 @@
 {
     "appKeys": {},
     "capabilities": [
-        ""
+        "configurable"
     ],
     "companyName": "aloniko.zus@gmail.com",
     "longName": "PebbleGamePrice",
@@ -33,9 +33,14 @@
     },
     "sdkVersion": "3",
     "shortName": "PebbleGamePrice",
+    "targetPlatforms": [
+        "aplite",
+        "basalt",
+        "chalk"
+    ],
     "uuid": "59b1c367-1d80-40c4-9659-138145367db6",
     "versionCode": 1,
-    "versionLabel": "1.0",
+    "versionLabel": "0.1",
     "watchapp": {
         "hiddenApp": false,
         "watchface": false
